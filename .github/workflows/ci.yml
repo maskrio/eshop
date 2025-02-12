@@ -1,6 +1,5 @@
 name: Continuous Integration (CI)
 
-## Run CI jobs on all branches by default
 on:
   push:
   pull_request:
@@ -21,4 +20,4 @@ jobs:
       - name: Ensure gradlew is executable
         run: chmod +x gradlew
       - name: Run unit tests
-        run: ./gradlew test
+        run: ./gradlew test --info
