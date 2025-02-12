@@ -1,5 +1,6 @@
 name: Continuous Integration (CI)
 
+## Run CI jobs on all branches by default
 on:
   push:
   pull_request:
@@ -19,7 +20,5 @@ jobs:
           cache: "gradle"
       - name: Ensure gradlew is executable
         run: chmod +x gradlew
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=${{ steps.setup-java.outputs.path }}" >> $GITHUB_ENV
       - name: Run unit tests
-        run: ./gradlew test --info
+        run: ./gradlew test
