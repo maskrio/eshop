@@ -21,4 +21,4 @@ public class MainControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("homePage"));
     }
-}J
+}
