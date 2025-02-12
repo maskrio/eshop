@@ -19,5 +19,7 @@ jobs:
           cache: "gradle"
       - name: Ensure gradlew is executable
         run: chmod +x gradlew
+      - name: Set JAVA_HOME
+        run: echo "JAVA_HOME=/path/to/java/home" >> $GITHUB_ENV
       - name: Run unit tests
         run: ./gradlew test --info
