@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -18,9 +17,6 @@ public class ProductRepositoryTest {
 
     @InjectMocks
     ProductRepository productRepository;
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void testCreateAndFind() {
