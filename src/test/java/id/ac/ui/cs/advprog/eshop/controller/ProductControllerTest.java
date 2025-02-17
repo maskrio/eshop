@@ -13,11 +13,16 @@ import java.util.Arrays;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.boot.test.context.TestConfiguration;
 
 @WebMvcTest(ProductController.class)
 public class ProductControllerTest {
@@ -25,9 +30,17 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Autowired
     private ProductService productService;
-
+    
+    @TestConfiguration
+    static class ProductControllerTestConfig {
+        @Bean
+        public ProductService productService() {
+            return org.mockito.Mockito.mock(ProductService.class);
+        }
+    }
+    
     @Test
     void testCreateProductPage() throws Exception {
         mockMvc.perform(get("/product/create"))

@@ -17,7 +17,7 @@ public class MainControllerTest {
 
     @Test
     void testHomePage() throws Exception {
-        mockMvc.perform(get(""))
+        mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("homePage"));
     }
