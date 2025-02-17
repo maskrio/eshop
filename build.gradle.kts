@@ -81,6 +81,11 @@ tasks.test{
     finalizedBy(tasks.jacocoTestReport)
 }
 
-tasks.jacocoTestReport{
-    dependsOn(tasks.test)
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+
+	reports {
+    html.required = true
+    xml.required = true
+  }
 }
