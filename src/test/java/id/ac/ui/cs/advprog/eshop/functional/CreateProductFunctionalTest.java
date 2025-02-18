@@ -52,12 +52,12 @@ public class CreateProductFunctionalTest {
     @Nested
     class ProductListPageTests {
         @Test
-        void productListPage_isDisplayed(ChromeDriver driver) throws Exception {
+        void productListPage_isDisplayed(ChromeDriver driver) {
             driver.get(baseUrl + "/product/list");
             assertPageTitle(driver, "Product List");
         }
         @Test
-        void productListPage_hasCreateButton(ChromeDriver driver) throws Exception {
+        void productListPage_hasCreateButton(ChromeDriver driver) {
             driver.get(baseUrl + "/product/list");
             driver.findElement(By.id("create")).click();
             assertPageTitle(driver, "Create New Product");
@@ -66,12 +66,12 @@ public class CreateProductFunctionalTest {
     @Nested
     class CreateProductPageTests {
         @Test
-        void createProductPage_isDisplayed(ChromeDriver driver) throws Exception {
+        void createProductPage_isDisplayed(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             assertPageTitle(driver, "Create New Product");
         }
         @Test
-        void createProductPage_hasCorrectFormFields(ChromeDriver driver) throws Exception {
+        void createProductPage_hasCorrectFormFields(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
 
             assertFormAction(driver, baseUrl + "/product/create");
@@ -79,7 +79,7 @@ public class CreateProductFunctionalTest {
             assertFormFieldNotNull(driver, "quantityInput");
         }
         @Test
-        void createProductPage_canCreateProduct(ChromeDriver driver) throws Exception {
+        void createProductPage_canCreateProduct(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
 
 
@@ -97,7 +97,7 @@ public class CreateProductFunctionalTest {
     @Nested
     class EditProductPageTests {
         @Test
-        void editProductPage_isDisplayed(ChromeDriver driver) throws Exception {
+        void editProductPage_isDisplayed(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             driver.findElement(By.id("nameInput")).sendKeys("Ado");
             driver.findElement(By.id("quantityInput")).sendKeys("177013");
@@ -107,7 +107,7 @@ public class CreateProductFunctionalTest {
             assertPageTitle(driver, "Edit Product");
         }
         @Test
-        void editProductPage_hasCorrectFormFields(ChromeDriver driver) throws Exception {
+        void editProductPage_hasCorrectFormFields(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             driver.findElement(By.id("nameInput")).sendKeys("Ado");
             driver.findElement(By.id("quantityInput")).sendKeys("177013");
@@ -122,7 +122,7 @@ public class CreateProductFunctionalTest {
             assertEquals("177013", getFormFieldValue(driver, "quantityInput"));
         }
         @Test
-        void editProductPage_canEditProduct(ChromeDriver driver) throws Exception {
+        void editProductPage_canEditProduct(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             driver.findElement(By.id("nameInput")).sendKeys("Ado");
             driver.findElement(By.id("quantityInput")).sendKeys("177013");
@@ -145,7 +145,7 @@ public class CreateProductFunctionalTest {
     @Nested
     class DeleteProductTests {
         @Test
-        void deleteProduct(ChromeDriver driver) throws Exception {
+        void deleteProduct(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             driver.findElement(By.id("nameInput")).sendKeys("All my Fellas");
             driver.findElement(By.id("quantityInput")).sendKeys("177013");
@@ -157,7 +157,7 @@ public class CreateProductFunctionalTest {
             assertEquals(false, pageSourceContains(driver, "All my Fellas"));
         }
         @Test
-        void deleteFirstProduct(ChromeDriver driver) throws Exception {
+        void deleteFirstProduct(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
 
             driver.findElement(By.id("nameInput")).sendKeys("All my Fellas");
@@ -176,7 +176,7 @@ public class CreateProductFunctionalTest {
             assertEquals(true, pageSourceContains(driver, "Usagi"));
         }
         @Test
-        void deleteLastProduct(ChromeDriver driver) throws Exception {
+        void deleteLastProduct(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             driver.findElement(By.id("nameInput")).sendKeys("All my Fellas");
             driver.findElement(By.id("quantityInput")).sendKeys("177013");
@@ -194,7 +194,7 @@ public class CreateProductFunctionalTest {
             assertEquals(false, pageSourceContains(driver, "Usagi"));
         }
         @Test
-        void deleteEditedProduct(ChromeDriver driver) throws Exception {
+        void deleteEditedProduct(ChromeDriver driver) {
             driver.get(baseUrl + "/product/create");
             driver.findElement(By.id("nameInput")).sendKeys("Pokemon");
             driver.findElement(By.id("quantityInput")).sendKeys("177013");
