@@ -1,5 +1,7 @@
 # eshop
 
+# Tutorial 1
+
 ## Reflection 1
 Clean Code principle, methods should be concise and serves one specific purpose, the code will be easier to maintain and test. Implementation has to be straightforward, self-documenting with meaningfull variable and method names. Bug detections become simpler due to focused functionality and maintenance becomes more managable. 
 
@@ -19,3 +21,26 @@ Code coverage helps identify parts of the code that aren't tested, and 100% cove
 
 2. 
 If you make a new File and create the same exact setup procedures and instance variables, maintenance will get difficult later due to any changes to the setup code must be replicated across all test classes. The potential improvement is use a shared base class that all test classes extend such that common logic is centralized, easing future modifications and reducing redundancy.
+
+# Tutorial 2
+
+## Reflection
+
+1. 
+
+Code Qualities issues that I encounter are, 
+- multiple unused imports, redundant for maintainability
+- using throw new Exception class, redundant for maintainability
+- Autowired, it is better to use autoWired like this to be sure that Service is specified correctly
+```java 
+    private final ProductService service;
+    @Autowired
+    public ProductController(ProductService service) {
+        this.service = service;
+    }
+```
+
+
+2.
+
+Yes, the CI implementation already automaticallybuilds, tests, and analyzes the code on push/pull requests. The workflows run multiple quality checks such as unit tests, SonarQube analysis, and even supply-chain security with scorecard, ensuring that the codebase remains healthy and maintainable. The CD is configured using koyeb, on every push to main branch, it automatically deploy the processes to production.  In conclusion, the CI/CD implementation has met the definition, but there're tons of room for improvements. 
