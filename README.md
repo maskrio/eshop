@@ -29,9 +29,24 @@ If you make a new File and create the same exact setup procedures and instance v
 1. 
 
 Code Qualities issues that I encounter are, 
-- multiple unused imports, redundant for maintainability
-- using throw new Exception class, redundant for maintainability
-- Autowired, it is better to use autoWired like this to be sure that Service is specified correctly
+- multiple unused imports, I removed unused imports for maintainability purposes,
+- using throw new Exception class, I removed them to make the codes cleaner,
+```java
+@Test
+void productListPage_isDisplayed(ChromeDriver driver) throws Exception{
+    driver.get(baseUrl + "/product/list");
+    assertPageTitle(driver, "Product List");
+}
+```
+
+```java
+@Test
+void productListPage_isDisplayed(ChromeDriver driver){ // remove throwing exception
+    driver.get(baseUrl + "/product/list");
+    assertPageTitle(driver, "Product List");
+}
+```
+- Autowired, it is better to use Autowired like this to be sure that Service is specified correctly
 ```java 
     private final ProductService service;
     @Autowired
@@ -40,7 +55,9 @@ Code Qualities issues that I encounter are,
     }
 ```
 
+There's not much issues regarding code quality other than needing someone else to review the code to ensure maintainability, which I can't really fix :D. SonarCloud really helped me spot this issues, but I'm using the free version that I have to push to main to obtain the results.
+
 
 2.
 
-Yes, the CI implementation already automaticallybuilds, tests, and analyzes the code on push/pull requests. The workflows run multiple quality checks such as unit tests, SonarQube analysis, and even supply-chain security with scorecard, ensuring that the codebase remains healthy and maintainable. The CD is configured using koyeb, on every push to main branch, it automatically deploy the processes to production.  In conclusion, the CI/CD implementation has met the definition, but there're tons of room for improvements. 
+Yes, the CI implementation already automatically builds, tests, and analyzes the code on push/pull requests. The workflows run multiple quality checks such as unit tests, SonarQube analysis, and even supply-chain security with scorecard, ensuring that the codebase remains healthy and maintainable. The CD is configured using koyeb, on every push to main branch, it automatically deploy the processes to production. The automation helps developers spotting issues and fix them to prevent broken codes being released to production or unmaintainable codes unintentionally left in the codebase.  In conclusion, the CI/CD implementation has met the definition of Continuous Integration and Continuous Deployment. 
