@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.boot.test.context.TestConfiguration;
 
 @WebMvcTest(ProductController.class)
-public class ProductControllerTest {
+class ProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
