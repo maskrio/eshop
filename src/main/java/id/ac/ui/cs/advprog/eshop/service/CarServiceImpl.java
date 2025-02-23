@@ -35,12 +35,12 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public void update(String carId, Car car) {
-    carRepository.update(carId, car);
+  public Car update(String carId, Car car) {
+    return carRepository.update(carId, car);
   }
 
   @Override
-  public void deleteCarById(String carId) {
-    carRepository.delete(carId);
+  public Car deleteCarById(String carId) {
+    return carRepository.delete(carId);
   }
 }
