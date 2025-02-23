@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @WebMvcTest(CarController.class)
-public class CarControllerTest {
+class CarControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
