@@ -12,5 +12,5 @@ public interface CarRepository {
 	public Iterator<Car> findAll();
 	public Car findById(String id);
 	public Car update(String id, Car updateCar);
-	public void delete(String id);
+	public Car delete(String id);
 }
