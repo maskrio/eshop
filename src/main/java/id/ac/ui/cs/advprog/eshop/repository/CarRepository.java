@@ -11,6 +11,6 @@ public interface CarRepository {
 	public Car create(Car car) ;
 	public Iterator<Car> findAll();
 	public Car findById(String id);
-	public Car edit(String id, Car updateCar);
+	public Car update(String id, Car updateCar);
 	public Car delete(String id);
 }
