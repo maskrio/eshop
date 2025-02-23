@@ -1,5 +1,13 @@
 # eshop
 
+
+#### Quick Access
+- [Tutorial 1](#tutorial-1)
+
+- [Tutorial 2](#tutorial-2)
+
+- [Tutorial 3](#tutorial-3)
+
 # Tutorial 1
 
 ## Reflection 1
@@ -61,3 +69,30 @@ There's not much issues regarding code quality other than needing someone else t
 2.
 
 Yes, the CI implementation already automatically builds, tests, and analyzes the code on push/pull requests. The workflows run multiple quality checks such as unit tests, SonarQube analysis, and even supply-chain security with scorecard, ensuring that the codebase remains healthy and maintainable. The CD is configured using koyeb, on every push to main branch, it automatically deploy the processes to production. The automation helps developers spotting issues and fix them to prevent broken codes being released to production or unmaintainable codes unintentionally left in the codebase.  In conclusion, the CI/CD implementation has met the definition of Continuous Integration and Continuous Deployment. 
+
+# Tutorial 3
+
+> 1. Explain what principles you apply to your project!
+
+- **Single Responsibility Principle**: By separating each class into different files, I make sure that each class has only one responsibility. 
+    - CarController was extending ProductController, but CarController does not have anything to do with Product. ProductController has the responsibility to product-related requests while the Car Controller has the responsibility to car-related requests. 
+    - Repository, Service, Model, and Controller each have a single responsibilty. Repository to handle database related operations, Servince to handle business logics operations, Model to define the object entity, and Controller to Control requests. 
+- **Open Closed Principle**: The software artifact should be open for extension but closed to modification.
+    - I implemented the basic functions on Car, we don't need to add the same function on other class that inherits it. The update function also added to reduce complexity on service layer and closed to modification. 
+- **Dependancy Inversion Principle**: we should use abstraction over concrete implementations, classes shouldn't depend to the modules directly; instead, should depend on abstraction, being independent to the specific details. 
+    - I changed CarController to depend on the interface instead of directly to the implementation of CarService. 
+    - I abstracted CarRepository and ProductRepository so the Service doesn't depend directly to the modules.
+
+> 2.  Explain the advantages of applying SOLID principles to your project with examples.
+
+- The code is easier to maintain. By applying SRP, every class has only one responsibility. If I wanted to change the business logic, I know that I have to modify Service. I don't need to change other classes because it holds different responsibility. 
+
+- The code is easier to test. Depending on abstraction allows us to subtitute real components with mocks during testing. In this Project, CarController depends on a CarService interface, we can easily inject a mock CarService when writing unit tests. This makes the tests more focused and easier to maintain. 
+
+- The code is more flexible. By applying OCP, when a new functionality needs to be added to the Car Domain such as adding behaviours, we can extend the existing implementation without altering tested and stable code, reducing the risk of introducing bugs.
+
+> 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+- SOLID principles lead to an increase in the number of classes and interfaces. The codebase became more complex and harder to navigate. In our code, a single request has to navigate through Controller, Service, and Repository. We could just squash them into a single function, but the code is harder to maintain.
+
+- Developers should think more during development. Strictly applying SOLID principles requires more upfront planning, additional interfaces, and wiring between components, which might slow down development time.  
