@@ -63,13 +63,13 @@ class PaymentServiceTest {
     }
 
     @Test
-    void testSetStatus() {
+    void testUpdatePayment() {
         Payment payment = payments.get(0);
         Payment newPayment = paymentRepository.save(payment);
-        String status = PaymentStatus.SUCCESS.getValue();
-        Payment updated = paymentRepository.setStatus(payment.getId(), status);
+        newPayment.setStatus(PaymentStatus.FAILED.getValue());
+        Payment updated = paymentRepository.save(newPayment);
         assertNotNull(updated);
-        assertEquals(status, updated.getStatus());
+        assertEquals(newPayment, updated.getStatus());
     }
 
     @Test
