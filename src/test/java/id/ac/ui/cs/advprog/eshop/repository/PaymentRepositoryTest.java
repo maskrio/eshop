@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class PaymentServiceTest {
+class PaymentRepositoryTest {
 
     @InjectMocks
     private PaymentRepository paymentRepository;
@@ -73,11 +73,11 @@ class PaymentServiceTest {
     }
 
     @Test
-    void testGetPayment() {
+    void testFindById() {
         Payment payment = payments.get(0);
-        Payment found = paymentRepository.getPayment(payment.getId());
+        Payment found = paymentRepository.findById(payment.getId());
         assertNotNull(found);
-        assertEquals(payment.getId(), found.getId());
+        assertEquals(payment, found);
     }
 
     @Test
