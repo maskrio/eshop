@@ -1,3 +1,5 @@
+package id.ac.ui.cs.advprog.eshop.model;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -6,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-package id.ac.ui.cs.advprog.eshop.model;
 
 public class PaymentTest {
     private Map<String, String> paymentData;
@@ -44,16 +44,16 @@ public class PaymentTest {
 
     @Test
     void testCreatePaymentDefaultStatus() {
-        Payment payment = new Payment("1234", "CreditCard", order);
+        Payment payment = new Payment("1234", "VOUCHER", order);
         assertEquals("PENDING", payment.getStatus());
         assertEquals("1234", payment.getId());
-        assertEquals("CreditCard", payment.getMethod());
-        assertNotNull(payment.getPaymentData());
+        assertEquals("VOUCHER", payment.getMethod());
+        assertTrue(payment.getPaymentData().isEmpty());
     }
 
     @Test
     void testCreatePaymentSuccessStatus() {
-        Payment payment = new Payment("1234", "QRPay", order, "SUCCESS", paymentData);
+        Payment payment = new Payment("1234", "VOUCHER", order, "SUCCESS", paymentData);
         assertEquals("SUCCESS", payment.getStatus());
         assertEquals(paymentData, payment.getPaymentData());
     }
@@ -61,20 +61,20 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("1234", "EWallet", order, "MEOW", paymentData);
+            new Payment("1234", "VOUCHER", order, "MEOW", paymentData);
         });
     }
 
     @Test
     void testSetStatusToFailed() {
-        Payment payment = new Payment("1234", "EWallet", order, "SUCCESS", paymentData);
+        Payment payment = new Payment("1234", "VOUCHER", order, "SUCCESS", paymentData);
         payment.setStatus("FAILED");
         assertEquals("FAILED", payment.getStatus());
     }
 
     @Test
     void testSetStatusToInvalidStatus() {
-        Payment payment = new Payment("1234", "CreditCard". order, "PENDING", paymentData);
+        Payment payment = new Payment("1234", "VOUCHER", order, "PENDING", paymentData);
         assertThrows(IllegalArgumentException.class, () -> payment.setStatus("MEOW"));
     }
 }
