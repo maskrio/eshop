@@ -8,6 +8,8 @@
 
 - [Tutorial 3](#tutorial-3)
 
+- [Tutorial 4](#tutorial-4)
+
 # Tutorial 1
 
 ## Reflection 1
@@ -96,3 +98,21 @@ Yes, the CI implementation already automatically builds, tests, and analyzes the
 - SOLID principles lead to an increase in the number of classes and interfaces. The codebase became more complex and harder to navigate. In our code, a single request has to navigate through Controller, Service, and Repository. We could just squash them into a single function, but the code is harder to maintain.
 
 - Developers should think more during development. Strictly applying SOLID principles requires more upfront planning, additional interfaces, and wiring between components, which might slow down development time.  
+
+# Tutorial 4
+
+## Reflection
+> Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+
+I found that the current TDD flow has been useful in ensuring that my code behaves as expected and in catching regressions early. I need to plan and map out edge casses beforehand ensuring that tests not only verify correct results but also handle error conditions and unexpected inputs. Then, I write code solely to make those tests pass, the code aligns with the requirements and validated by the tests.
+
+>You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+
+My tests generally adhere to the F.I.R.S.T. principles, ensuring they are efficient and reliable.
+
+- Fast, most tests run quickly, ensure tests only use the minimum necessary setup so that they don't slow down the whole suite.
+- Isolated: I've used mocks to isolate unit tests, not relying on each other for execution.
+- Repeatable: My tests are repeatable, the data setup should be well managed.
+- Self-validating: Tests automatically verify expected outcome, eliminating the need for manual verification.
+- Timely: The TDD flow encourages writing tests first, and I found it useful in catching regressions early. All possibilities and conditions should be covered.
+
