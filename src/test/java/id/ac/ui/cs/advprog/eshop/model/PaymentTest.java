@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 
 public class PaymentTest {
     private Map<String, String> paymentData;
@@ -38,43 +40,43 @@ public class PaymentTest {
     @Test
     void testCreatePaymentEmptyMethod() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("1234", "", order, paymentData, "PENDING");
+            new Payment("1234", "", order, paymentData, PaymentStatus.PENDING.getValue());
         });
     }
 
     @Test
     void testCreatePaymentDefaultStatus() {
-        Payment payment = new Payment("1234", "VOUCHER", order, paymentData);
-        assertEquals("PENDING", payment.getStatus());
+        Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData);
+        assertEquals(PaymentStatus.PENDING.getValue(), payment.getStatus());
         assertEquals("1234", payment.getId());
-        assertEquals("VOUCHER", payment.getMethod());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
         assertEquals(paymentData, payment.getPaymentData());
     }
 
     @Test
     void testCreatePaymentSuccessStatus() {
-        Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "SUCCESS");
-        assertEquals("SUCCESS", payment.getStatus());
+        Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData, PaymentStatus.SUCCESS.getValue());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertEquals(paymentData, payment.getPaymentData());
     }
 
     @Test
     void testCreatePaymentInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("1234", "VOUCHER", order, paymentData, "MEOW");
+            new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData, "MEOW");
         });
     }
 
     @Test
     void testSetStatusToFailed() {
-        Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "SUCCESS");
-        payment.setStatus("FAILED");
-        assertEquals("FAILED", payment.getStatus());
+        Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData, PaymentStatus.SUCCESS.getValue());
+        payment.setStatus(PaymentStatus.FAILED.getValue());
+        assertEquals(PaymentStatus.FAILED.getValue(), payment.getStatus());
     }
 
     @Test
     void testSetStatusToInvalidStatus() {
-        Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "PENDING");
+        Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData, PaymentStatus.PENDING.getValue());
         assertThrows(IllegalArgumentException.class, () -> payment.setStatus("MEOW"));
     }
 
@@ -82,7 +84,7 @@ public class PaymentTest {
     void testEmptyPaymentData() {
         paymentData.clear();
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("1234", "VOUCHER", order, paymentData);
+            Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData);
         });
     }
 }
