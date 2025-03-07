@@ -82,6 +82,14 @@ class PaymentRepositoryTest {
     }
 
     @Test
+    void testFindByIdNotFound() {
+        Payment payment = payments.get(0);
+        paymentRepository.save(payment);
+        Payment found = paymentRepository.findById(payments.get(1).getId());
+        assertNull(found);
+    }
+
+    @Test
     void testGetAllPayments() {
         paymentRepository.save(payments.get(0));
         paymentRepository.save(payments.get(1));
