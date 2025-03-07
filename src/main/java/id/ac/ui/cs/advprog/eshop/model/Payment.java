@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 @Setter
 @Getter
@@ -17,16 +16,16 @@ public class Payment {
     String status;
     Map<String, String> paymentData;
 
-    public Payment(String id, String method, Order order) {
+    public Payment(String id, String method, Order order, Map<String, String> paymentData) {
         this.id = id;
         this.setMethod(method);
         this.order = order;
         this.setStatus("PENDING");
-        this.paymentData = new HashMap<>();
+        this.setPaymentData(paymentData);
     }
 
-    public Payment(String id, String method, Order order, String status, Map<String, String> paymentData) {
-        this(id, method, order);
+    public Payment(String id, String method, Order order, Map<String, String> paymentData, String status) {
+        this(id, method, order, paymentData);
         this.setStatus(status);
         this.paymentData = paymentData;
     }
@@ -45,6 +44,14 @@ public class Payment {
             throw new IllegalArgumentException("Invalid method");
         } else {
             this.method = method;
+        }
+    }
+
+    public void setPaymentData(Map<String, String> paymentData) {
+        if(paymentData.isEmpty()) {
+            throw new IllegalArgumentException("Empty Payment Data");
+        }else {
+            this.paymentData = paymentData;
         }
     }
 }
