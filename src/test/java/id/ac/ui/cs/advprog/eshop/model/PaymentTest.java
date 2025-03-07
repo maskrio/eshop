@@ -81,6 +81,14 @@ public class PaymentTest {
     }
 
     @Test
+    void testVoucherCodeNull(){
+        paymentData.clear();
+        paymentData.put("accountNumber", "1234567890");
+        Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+    }
+
+    @Test
     void testVoucherCodeInvalidLength() {
         paymentData.clear();
         paymentData.put("voucherCode", "ESHOP1234ABC567");
@@ -124,10 +132,26 @@ public class PaymentTest {
     }
 
     @Test
+    void testBankTransferNullBankName() {
+        paymentData.clear();
+        paymentData.put("referenceCode", "TRANS1234567890");
+        Payment payment = new Payment("1234", PaymentMethod.BANK_TRANSFER.getValue(), order, paymentData);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testBankTransferEmptyReferenceCode() {
+        paymentData.clear();
+        paymentData.put("bankName", "Bank XYZ");
+        paymentData.put("referenceCode", "");
+        Payment payment = new Payment("1234", PaymentMethod.BANK_TRANSFER.getValue(), order, paymentData);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+    }
+
+    @Test
     void testBankTransferNullReferenceCode() {
         paymentData.clear();
         paymentData.put("bankName", "Bank XYZ");
-        paymentData.put("referenceCode", null);
         Payment payment = new Payment("1234", PaymentMethod.BANK_TRANSFER.getValue(), order, paymentData);
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
