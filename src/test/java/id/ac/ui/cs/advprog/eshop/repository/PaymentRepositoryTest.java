@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.eshop.service;
+package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
@@ -56,9 +56,9 @@ class PaymentRepositoryTest {
 
     @Test
     void testAddPayment() {
-        Payment newPayment = paymentRepository.save(payments.get(0));
+        Payment newPayment = paymentRepository.save(payments.get(1));
         assertNotNull(newPayment);
-        assertEquals(PaymentMethod.VOUCHER.getValue(), newPayment.getMethod());
+        assertEquals(PaymentMethod.BANK_TRANSFER.getValue(), newPayment.getMethod());
         assertEquals(payments.get(1).getOrder(), newPayment.getOrder());
     }
 
@@ -69,12 +69,13 @@ class PaymentRepositoryTest {
         newPayment.setStatus(PaymentStatus.FAILED.getValue());
         Payment updated = paymentRepository.save(newPayment);
         assertNotNull(updated);
-        assertEquals(newPayment, updated.getStatus());
+        assertEquals(newPayment.getStatus(), updated.getStatus());
     }
 
     @Test
     void testFindById() {
         Payment payment = payments.get(0);
+        paymentRepository.save(payment);
         Payment found = paymentRepository.findById(payment.getId());
         assertNotNull(found);
         assertEquals(payment, found);
@@ -82,6 +83,8 @@ class PaymentRepositoryTest {
 
     @Test
     void testGetAllPayments() {
+        paymentRepository.save(payments.get(0));
+        paymentRepository.save(payments.get(1));
         List<Payment> result = paymentRepository.getAllPayments();
         assertNotNull(result);
         assertEquals(payments.size(), result.size());
