@@ -77,4 +77,12 @@ public class PaymentTest {
         Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "PENDING");
         assertThrows(IllegalArgumentException.class, () -> payment.setStatus("MEOW"));
     }
+
+    @Test 
+    void testEmptyPaymentData() {
+        paymentData.clear();
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment("1234", "VOUCHER", order, paymentData);
+        });
+    }
 }
