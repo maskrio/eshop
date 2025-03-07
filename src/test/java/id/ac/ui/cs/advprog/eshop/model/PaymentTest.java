@@ -35,6 +35,7 @@ public class PaymentTest {
         paymentData = new HashMap<>();
         paymentData.put("accountNumber", "1234567890");
         paymentData.put("accountName", "Mana A");
+        paymentData.put("voucherCode", "ESHOP1234ABC5678"); 
     }
 
     @Test
@@ -67,9 +68,8 @@ public class PaymentTest {
     @Test 
     void testEmptyPaymentData() {
         paymentData.clear();
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData);
-        });
+        Payment payment = new Payment("1234", PaymentMethod.VOUCHER.getValue(), order, paymentData);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
