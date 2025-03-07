@@ -38,22 +38,22 @@ public class PaymentTest {
     @Test
     void testCreatePaymentEmptyMethod() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("1234", "", order, "PENDING",  paymentData);
+            new Payment("1234", "", order, paymentData, "PENDING");
         });
     }
 
     @Test
     void testCreatePaymentDefaultStatus() {
-        Payment payment = new Payment("1234", "VOUCHER", order);
+        Payment payment = new Payment("1234", "VOUCHER", order, paymentData);
         assertEquals("PENDING", payment.getStatus());
         assertEquals("1234", payment.getId());
         assertEquals("VOUCHER", payment.getMethod());
-        assertTrue(payment.getPaymentData().isEmpty());
+        assertEquals(paymentData, payment.getPaymentData());
     }
 
     @Test
     void testCreatePaymentSuccessStatus() {
-        Payment payment = new Payment("1234", "VOUCHER", order, "SUCCESS", paymentData);
+        Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "SUCCESS");
         assertEquals("SUCCESS", payment.getStatus());
         assertEquals(paymentData, payment.getPaymentData());
     }
@@ -61,20 +61,20 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("1234", "VOUCHER", order, "MEOW", paymentData);
+            new Payment("1234", "VOUCHER", order, paymentData, "MEOW");
         });
     }
 
     @Test
     void testSetStatusToFailed() {
-        Payment payment = new Payment("1234", "VOUCHER", order, "SUCCESS", paymentData);
+        Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "SUCCESS");
         payment.setStatus("FAILED");
         assertEquals("FAILED", payment.getStatus());
     }
 
     @Test
     void testSetStatusToInvalidStatus() {
-        Payment payment = new Payment("1234", "VOUCHER", order, "PENDING", paymentData);
+        Payment payment = new Payment("1234", "VOUCHER", order, paymentData, "PENDING");
         assertThrows(IllegalArgumentException.class, () -> payment.setStatus("MEOW"));
     }
 }
