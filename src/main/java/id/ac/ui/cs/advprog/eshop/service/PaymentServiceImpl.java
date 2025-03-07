@@ -11,24 +11,28 @@ import java.util.List;
 import java.util.UUID;
 
 public class PaymentServiceImpl {
+    private final PaymentRepository paymentRepository;
+
     @Autowired
-    private PaymentRepository PaymentRepository;
+    public PaymentServiceImpl(PaymentRepository paymentRepository) {
+        this.paymentRepository = paymentRepository;
+    }
 
     public Payment addPayment(Order order, String method, Map<String, String> paymentData){
         Payment payment = new Payment(UUID.randomUUID().toString(), method, order, paymentData);
-        return PaymentRepository.save(payment);
+        return paymentRepository.save(payment);
     }
 
     public Payment setStatus(Payment payment, String status){
         payment.setStatus(status);
-        return PaymentRepository.save(payment);
+        return paymentRepository.save(payment);
     }
 
     public Payment getPayment(String paymentId){
-        return PaymentRepository.findById(paymentId);
+        return paymentRepository.findById(paymentId);
     }
 
     public List<Payment> getAllPayments(){
-        return PaymentRepository.getAllPayments();
+        return paymentRepository.getAllPayments();
     }
 }
